@@ -21,7 +21,7 @@ import java.awt.event.ActionListener;
 
 /**
  *
- * @author PREDATOR
+ * @author Kelompok 1
  */
 public class main extends javax.swing.JFrame {
 
