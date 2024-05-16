@@ -198,8 +198,16 @@ public class main extends javax.swing.JFrame {
         
         
         addMenu(menuData,menuTransaksi,menuReport );
+        
+        //pn_sidebar
+        
+       
             
         
+    }
+    private void addLogo (LogoItem...Logo){
+        
+        pn_navbar.revalidate();
     }
     
     private void addMenu(MenuItem... menu){

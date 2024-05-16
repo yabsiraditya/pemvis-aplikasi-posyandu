@@ -6,21 +6,26 @@
 package projectposyandu;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import koneksi.koneksi;
 /**
  *
  * @author PREDATOR
  */
 public class login extends javax.swing.JFrame {
     int xx, xy;
+    private Connection conn = new koneksi().connect();
 
     /**
      * Creates new form login
      */
     public login() {
         initComponents();
+        btn_regist.setEnabled(false);
     }
 
     /**
@@ -32,18 +37,52 @@ public class login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        kpassword = new javax.swing.JPasswordField();
+        jFrame1 = new javax.swing.JFrame();
+        jLabel9 = new javax.swing.JLabel();
+        mainpanel2 = new javax.swing.JPanel();
+        panellogin = new javax.swing.JPanel();
+        label_toregist = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        kpassword = new javax.swing.JPasswordField();
+        kpassword1 = new javax.swing.JPasswordField();
         kusername = new javax.swing.JTextField();
-        breset = new javax.swing.JButton();
+        ic_posyandu = new javax.swing.JLabel();
+        ic_close = new javax.swing.JLabel();
         Blogin = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        ic_profile = new javax.swing.JLabel();
+        ic_key = new javax.swing.JLabel();
+        bg_login = new javax.swing.JLabel();
+        bg_ibu = new javax.swing.JLabel();
+        wp = new javax.swing.JLabel();
+        panelregist = new javax.swing.JPanel();
+        k_pass = new javax.swing.JPasswordField();
+        label_login = new javax.swing.JLabel();
+        label_close = new javax.swing.JLabel();
+        posyandu = new javax.swing.JLabel();
+        k_idkader = new javax.swing.JTextField();
+        btn_regist = new javax.swing.JButton();
+        label_kunci = new javax.swing.JLabel();
+        label_sudah = new javax.swing.JLabel();
+        k_user = new javax.swing.JTextField();
+        btn_cek = new javax.swing.JButton();
+        label_profil = new javax.swing.JLabel();
+        label_idc = new javax.swing.JLabel();
+        bg_regis2 = new javax.swing.JLabel();
+        ibu = new javax.swing.JLabel();
+        bg_regis1 = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        jLabel9.setText("jLabel9");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -58,8 +97,23 @@ public class login extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        mainpanel2.setLayout(new java.awt.CardLayout());
+
+        panellogin.setBackground(new java.awt.Color(255, 255, 255));
+        panellogin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        label_toregist.setText("Tidak mempunyai akun?");
+        panellogin.add(label_toregist, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 450, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setText("Register");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        panellogin.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 450, -1, -1));
 
         kpassword.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         kpassword.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.blue));
@@ -68,19 +122,16 @@ public class login extends javax.swing.JFrame {
                 kpasswordActionPerformed(evt);
             }
         });
-        jPanel1.add(kpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 350, 40));
+        panellogin.add(kpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 350, 40));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Close_3.png"))); // NOI18N
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+        kpassword1.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        kpassword1.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.blue));
+        kpassword1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kpassword1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 10, 30, 30));
-
-        jLabel2.setBackground(new java.awt.Color(102, 153, 255));
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Posyandu 2021 Logo (PNG1080p) - Vector69Com (3).png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, -1, -1));
+        panellogin.add(kpassword1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 350, 40));
 
         kusername.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         kusername.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.blue));
@@ -90,19 +141,20 @@ public class login extends javax.swing.JFrame {
                 kusernameActionPerformed(evt);
             }
         });
-        jPanel1.add(kusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 350, 40));
+        panellogin.add(kusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 350, 40));
 
-        breset.setBackground(new java.awt.Color(255, 255, 255));
-        breset.setText("RESET");
-        breset.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(255, 255, 255), java.awt.Color.red));
-        breset.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bresetActionPerformed(evt);
+        ic_posyandu.setBackground(new java.awt.Color(102, 153, 255));
+        ic_posyandu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Posyandu 2021 Logo (PNG1080p) - Vector69Com (3).png"))); // NOI18N
+        panellogin.add(ic_posyandu, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, -1, -1));
+
+        ic_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Close_3.png"))); // NOI18N
+        ic_close.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ic_closeMouseClicked(evt);
             }
         });
-        jPanel1.add(breset, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 410, 110, 30));
+        panellogin.add(ic_close, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 10, 30, 30));
 
-        Blogin.setBackground(new java.awt.Color(255, 255, 255));
         Blogin.setText("LOG IN");
         Blogin.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, new java.awt.Color(0, 153, 255)));
         Blogin.addActionListener(new java.awt.event.ActionListener() {
@@ -110,32 +162,142 @@ public class login extends javax.swing.JFrame {
                 BloginActionPerformed(evt);
             }
         });
-        jPanel1.add(Blogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 110, 30));
+        panellogin.add(Blogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 410, 110, 30));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Contacts_3.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 50, 60));
+        ic_profile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Contacts_3.png"))); // NOI18N
+        panellogin.add(ic_profile, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 50, 60));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Key_7.png"))); // NOI18N
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, 60, 40));
+        ic_key.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Key_7.png"))); // NOI18N
+        panellogin.add(ic_key, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, 60, 40));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/baks3 (1).png"))); // NOI18N
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 580, 390));
+        bg_login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/baks3 (1).png"))); // NOI18N
+        bg_login.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        panellogin.add(bg_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 580, 390));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/—Pngtree—mother with her girl illustration_14269801 (1) (3).png"))); // NOI18N
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 0, 590, 660));
+        bg_ibu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/—Pngtree—mother with her girl illustration_14269801 (1) (3).png"))); // NOI18N
+        panellogin.add(bg_ibu, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 0, 590, 660));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ombre-7419016_1280.jpg"))); // NOI18N
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 660));
+        wp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ombre-7419016_1280.jpg"))); // NOI18N
+        panellogin.add(wp, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 660));
+
+        mainpanel2.add(panellogin, "card2");
+
+        panelregist.setBackground(new java.awt.Color(255, 255, 255));
+        panelregist.setMinimumSize(new java.awt.Dimension(1070, 660));
+        panelregist.setPreferredSize(new java.awt.Dimension(1070, 660));
+        panelregist.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        k_pass.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        k_pass.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.blue));
+        k_pass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                k_passActionPerformed(evt);
+            }
+        });
+        panelregist.add(k_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 350, 40));
+
+        label_login.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        label_login.setForeground(new java.awt.Color(102, 255, 255));
+        label_login.setText("Login");
+        label_login.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                label_loginMouseClicked(evt);
+            }
+        });
+        panelregist.add(label_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 498, -1, -1));
+
+        label_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Close_3.png"))); // NOI18N
+        label_close.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                label_closeMouseClicked(evt);
+            }
+        });
+        panelregist.add(label_close, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 10, 30, 30));
+
+        posyandu.setBackground(new java.awt.Color(102, 153, 255));
+        posyandu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Posyandu 2021 Logo (PNG1080p) - Vector69Com (3).png"))); // NOI18N
+        panelregist.add(posyandu, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, -1, -1));
+
+        k_idkader.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        k_idkader.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.blue));
+        k_idkader.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        k_idkader.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                k_idkaderActionPerformed(evt);
+            }
+        });
+        panelregist.add(k_idkader, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 350, 40));
+
+        btn_regist.setText("REGISTER");
+        btn_regist.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, new java.awt.Color(0, 153, 255)));
+        btn_regist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_registActionPerformed(evt);
+            }
+        });
+        panelregist.add(btn_regist, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, 110, 30));
+
+        label_kunci.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Key_7.png"))); // NOI18N
+        panelregist.add(label_kunci, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 410, 60, 40));
+
+        label_sudah.setText("Sudah mempunyai akun?");
+        panelregist.add(label_sudah, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 500, -1, -1));
+
+        k_user.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        k_user.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.blue));
+        k_user.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        k_user.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                k_userActionPerformed(evt);
+            }
+        });
+        panelregist.add(k_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 350, 40));
+
+        btn_cek.setText("Cek ID");
+        btn_cek.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cekActionPerformed(evt);
+            }
+        });
+        panelregist.add(btn_cek, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 320, -1, -1));
+
+        label_profil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Contacts_3.png"))); // NOI18N
+        panelregist.add(label_profil, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 50, 60));
+
+        label_idc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/id_card.png"))); // NOI18N
+        panelregist.add(label_idc, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 40, 60));
+
+        bg_regis2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/baks35.png"))); // NOI18N
+        bg_regis2.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        panelregist.add(bg_regis2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 580, 340));
+
+        ibu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/—Pngtree—mother with her girl illustration_14269801 (1) (3).png"))); // NOI18N
+        panelregist.add(ibu, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 0, 590, 660));
+
+        bg_regis1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ombre-7419016_1280.jpg"))); // NOI18N
+        panelregist.add(bg_regis1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 660));
+
+        mainpanel2.add(panelregist, "card3");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 1070, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(mainpanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 660, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(mainpanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -152,41 +314,172 @@ public class login extends javax.swing.JFrame {
         xy = evt.getY();
     }//GEN-LAST:event_formMousePressed
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        dispose();
-    }//GEN-LAST:event_jLabel1MouseClicked
+    private void btn_cekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cekActionPerformed
+        // TODO add your handling code here:
+        try {
+                if(k_idkader.getText() != null && !k_idkader.getText().isEmpty() && !k_idkader.getText().equals("")) {
+                    String sql = "SELECT id from kader where id=" + k_idkader.getText();
+                    java.sql.Statement stat = conn.createStatement();
+                    ResultSet hasil = stat.executeQuery(sql);
+                     if(!hasil.isBeforeFirst()) {
+                        JOptionPane.showMessageDialog(null, "ID tidak ditemukan, silahkan masukkan kembali ID yang benar");
+                        btn_regist.setEnabled(false);
+                     } else {
+                        System.out.println("1");
+                        String sql2 = "SELECT id_kader from user";
+                        stat = conn.createStatement();
+                        ResultSet hasil2 = stat.executeQuery(sql2);
+                        if(!hasil2.isBeforeFirst()) {
+                            System.out.println("15");
+                        } else {
+                            hasil2.next();
+                                if(k_idkader.getText().equals(hasil2.getString(1))) {
+                                    System.out.println("2");
+                                    JOptionPane.showMessageDialog(null, "ID sudah terdaftar, silahkan login");
+                                    btn_regist.setEnabled(false);
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "ID belum dipakai, silahkan lanjut");
+                                    btn_regist.setEnabled(true);
+                                }
+                        }
+                     }
+//                    } else if(!hasil.isBeforeFirst()) {
+//                        //System.out.println(k_idkader.getText());
+//                        //System.out.println("tidak ditemukan");
+//                        System.out.println("3");
+//                        JOptionPane.showMessageDialog(null, "ID tidak ditemukan, silahkan login");
+//                        J
+//                    }
+                       
+                } else {
+                    btn_regist.setEnabled(false);
+                    JOptionPane.showMessageDialog(null, "Masukkan ID Kader");
+                }
+                
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_btn_cekActionPerformed
+
+    private void k_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_k_userActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_k_userActionPerformed
+
+    private void btn_registActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registActionPerformed
+        // TODO add your handling code here:
+        
+        if(!k_idkader.getText().equals(null) && !k_user.getText().equals(null) && !k_pass.getText().equals(null) && !k_idkader.getText().isEmpty() && !k_user.getText().equals("") && !k_pass.getText().equals("")) {
+            try {
+                String sql = "INSERT into user values (?,?,?) ";
+                PreparedStatement stat = conn.prepareStatement(sql);
+                stat.setString(1, k_idkader.getText());
+                stat.setString(2, k_user.getText());
+                stat.setString(3, k_pass.getText());
+                stat.executeUpdate();
+                JOptionPane.showMessageDialog(null, "data berhasil disimpan");
+                //kosong();
+                k_idkader.requestFocus();
+                mainpanel2.removeAll();
+                mainpanel2.repaint();
+                mainpanel2.revalidate();
+
+                mainpanel2.add(panellogin);
+                mainpanel2.repaint();
+                mainpanel2.revalidate();
+            } catch(SQLException e) {
+                JOptionPane.showMessageDialog(null, "data gagal disimpan "+e);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Masukkan data yang ada!");
+        }
+    }//GEN-LAST:event_btn_registActionPerformed
+
+    private void k_idkaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_k_idkaderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_k_idkaderActionPerformed
+
+    private void label_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label_closeMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_label_closeMouseClicked
+
+    private void k_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_k_passActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_k_passActionPerformed
+
+    private void BloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BloginActionPerformed
+    if(!kusername.getText().equals("") && !kpassword.getText().equals("")) {
+        try {
+                System.out.println("1");
+                String sql = "SELECT * from user where user='" + kusername.getText() + "'";
+                java.sql.Statement stat = conn.createStatement();
+                ResultSet hasil = stat.executeQuery(sql);
+                if(!hasil.isBeforeFirst()) {
+                        JOptionPane.showMessageDialog(null, "username tidak ditemukan, periksa kembali username yang anda masukkan!");
+                        kusername.setText("");
+                        kpassword.setText("");
+                        kusername.requestFocus(true);
+                     } else {
+                    hasil.next();
+                    if(kpassword.getText().equals(hasil.getString(3))) {
+                        JOptionPane.showMessageDialog(null, "Login succes");
+                        main Main = new main();
+                        Main.setVisible(true);
+                        Main.revalidate();
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Password yang anda masukkan salah!");
+                        kpassword.setText("");
+                        kusername.requestFocus(true);
+                    }
+                }
+        } catch(SQLException e) {
+            JOptionPane.showMessageDialog(null, "data gagal disimpan "+e);
+          }
+    } else {
+                System.out.println("3");
+                JOptionPane.showMessageDialog(null, "Masukkan Username");
+            }
+       
+    }//GEN-LAST:event_BloginActionPerformed
 
     private void kusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kusernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_kusernameActionPerformed
 
-    private void bresetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bresetActionPerformed
-        kusername.setText("");
-        kpassword.setText("");
-    }//GEN-LAST:event_bresetActionPerformed
-
-    private void BloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BloginActionPerformed
-        String user = kusername.getText();
-        String pass = kpassword.getText();
-        
-        if (user.equals("sifa") && pass.equals("poss")){
-            JOptionPane.showMessageDialog(null, "Login succes");
-            main Main = new main();
-            Main.setVisible(true);
-            Main.revalidate();
-            
-            dispose();
-        }else{
-            JOptionPane.showMessageDialog(null, "username/password tidak sesuai");
-            kusername.setText("");
-            kpassword.setText("");
-            kusername.requestFocus(true);
-        }
-    }//GEN-LAST:event_BloginActionPerformed
+    private void ic_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ic_closeMouseClicked
+        dispose();
+    }//GEN-LAST:event_ic_closeMouseClicked
 
     private void kpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kpasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_kpasswordActionPerformed
+
+    private void label_loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label_loginMouseClicked
+        // TODO add your handling code here:
+        mainpanel2.removeAll();
+        mainpanel2.repaint();
+        mainpanel2.revalidate();
+
+        mainpanel2.add(panellogin);
+        mainpanel2.repaint();
+        mainpanel2.revalidate();
+        
+    }//GEN-LAST:event_label_loginMouseClicked
+
+    private void kpassword1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kpassword1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kpassword1ActionPerformed
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        mainpanel2.removeAll();
+        mainpanel2.repaint();
+        mainpanel2.revalidate();
+
+        mainpanel2.add(panelregist);
+        mainpanel2.repaint();
+        mainpanel2.revalidate();
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -225,16 +518,37 @@ public class login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Blogin;
-    private javax.swing.JButton breset;
+    private javax.swing.JLabel bg_ibu;
+    private javax.swing.JLabel bg_login;
+    private javax.swing.JLabel bg_regis1;
+    private javax.swing.JLabel bg_regis2;
+    private javax.swing.JButton btn_cek;
+    private javax.swing.JButton btn_regist;
+    private javax.swing.JLabel ibu;
+    private javax.swing.JLabel ic_close;
+    private javax.swing.JLabel ic_key;
+    private javax.swing.JLabel ic_posyandu;
+    private javax.swing.JLabel ic_profile;
+    private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField k_idkader;
+    private javax.swing.JPasswordField k_pass;
+    private javax.swing.JTextField k_user;
     private javax.swing.JPasswordField kpassword;
+    private javax.swing.JPasswordField kpassword1;
     private javax.swing.JTextField kusername;
+    private javax.swing.JLabel label_close;
+    private javax.swing.JLabel label_idc;
+    private javax.swing.JLabel label_kunci;
+    private javax.swing.JLabel label_login;
+    private javax.swing.JLabel label_profil;
+    private javax.swing.JLabel label_sudah;
+    private javax.swing.JLabel label_toregist;
+    private javax.swing.JPanel mainpanel2;
+    private javax.swing.JPanel panellogin;
+    private javax.swing.JPanel panelregist;
+    private javax.swing.JLabel posyandu;
+    private javax.swing.JLabel wp;
     // End of variables declaration//GEN-END:variables
 }

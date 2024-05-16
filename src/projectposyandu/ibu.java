@@ -8,6 +8,10 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import koneksi.koneksi;
 
 /**
@@ -33,7 +37,7 @@ public class ibu extends javax.swing.JPanel {
         k_id.setText("");
         k_nik.setText("");
         k_nama.setText("");
-        k_tl.setText("");
+        k_tl.setCalendar(null);
         k_alamat.setText("");
         k_notelp.setText("");
         k_status.setText("");
@@ -43,9 +47,9 @@ public class ibu extends javax.swing.JPanel {
         Object[] Baris = {"ID","NIK","NAMA", "TANGGAL LAHIR", "ALAMAT", "NO TELPON", "STATUS"};
         tabmode = new DefaultTableModel (null, Baris);
         
-        String cari = Kcari.getText();
-        try {
-            String sql = "SELECT * FROM balita where ID like '%"+cari+"%' or NAMA like '%"+cari+"%' order by ID asc";
+         String findItem = Kcari.getText();
+         try{
+            String sql = "SELECT * FROM ibu where id like '%"+findItem+ "%' or nik like '%" + findItem + "%' or nama like '%" + findItem + "%' order by id asc";
             Statement stat = conn.createStatement();
             ResultSet hasil = stat.executeQuery(sql);
             while (hasil.next()){
@@ -86,6 +90,7 @@ public class ibu extends javax.swing.JPanel {
         bt_tambahdata = new javax.swing.JButton();
         bt_hapusdata = new javax.swing.JButton();
         bt_ubahdata = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
         TU = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -104,15 +109,20 @@ public class ibu extends javax.swing.JPanel {
         k_id = new javax.swing.JTextField();
         k_nik = new javax.swing.JTextField();
         k_nama = new javax.swing.JTextField();
-        k_tl = new javax.swing.JTextField();
         k_notelp = new javax.swing.JTextField();
         bt_hapus2 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        k_tl = new com.toedter.calendar.JDateChooser();
+        jLabel11 = new javax.swing.JLabel();
 
         setLayout(new java.awt.CardLayout());
 
         mainpanel.setLayout(new java.awt.CardLayout());
 
-        Tibu.setFont(new java.awt.Font("Segoe UI Variable", 1, 13)); // NOI18N
+        dataibu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Tibu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tibu.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         Tibu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -149,84 +159,93 @@ public class ibu extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "NIK", "NAMA", "ALAMAT", "TANGGAL LAHIR", "NO TELEPON", "STATUS"
+                "ID", "NIK", "NAMA", "TANGGAL LAHIR", "ALAMAT", "NO TELEPON", "STATUS"
             }
         ));
         Tibu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Tibu.setIntercellSpacing(new java.awt.Dimension(5, 10));
         Tibu.setRowHeight(25);
         Tibu.getTableHeader().setReorderingAllowed(false);
+        Tibu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TibuMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(Tibu);
 
+        dataibu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 1640, 530));
+
+        Kcari.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Kcari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                KcariActionPerformed(evt);
+            }
+        });
+        Kcari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                KcariKeyReleased(evt);
+            }
+        });
+        dataibu.add(Kcari, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 294, 36));
+
+        bt_cari.setBackground(new java.awt.Color(153, 153, 153));
+        bt_cari.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         bt_cari.setText("CARI");
+        bt_cari.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bt_cari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_cariActionPerformed(evt);
+            }
+        });
+        bt_cari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                bt_cariKeyReleased(evt);
+            }
+        });
+        dataibu.add(bt_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 123, 36));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel1.setText("DATA IBU");
+        dataibu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 187, 46));
 
+        bt_tambahdata.setBackground(new java.awt.Color(7, 155, 7));
+        bt_tambahdata.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        bt_tambahdata.setForeground(new java.awt.Color(255, 255, 255));
         bt_tambahdata.setText("Tambah Data");
+        bt_tambahdata.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
         bt_tambahdata.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_tambahdataActionPerformed(evt);
             }
         });
+        dataibu.add(bt_tambahdata, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 690, 170, 40));
 
+        bt_hapusdata.setBackground(new java.awt.Color(255, 0, 51));
+        bt_hapusdata.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        bt_hapusdata.setForeground(new java.awt.Color(255, 255, 255));
         bt_hapusdata.setText("Hapus Data");
+        bt_hapusdata.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bt_hapusdata.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_hapusdataActionPerformed(evt);
             }
         });
+        dataibu.add(bt_hapusdata, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 690, 172, 42));
 
+        bt_ubahdata.setBackground(new java.awt.Color(123, 123, 215));
+        bt_ubahdata.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        bt_ubahdata.setForeground(new java.awt.Color(255, 255, 255));
         bt_ubahdata.setText("Ubah Data");
+        bt_ubahdata.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255)));
         bt_ubahdata.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_ubahdataActionPerformed(evt);
             }
         });
+        dataibu.add(bt_ubahdata, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 690, 172, 42));
 
-        javax.swing.GroupLayout dataibuLayout = new javax.swing.GroupLayout(dataibu);
-        dataibu.setLayout(dataibuLayout);
-        dataibuLayout.setHorizontalGroup(
-            dataibuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dataibuLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(dataibuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(dataibuLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
-                    .addGroup(dataibuLayout.createSequentialGroup()
-                        .addGroup(dataibuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(dataibuLayout.createSequentialGroup()
-                                .addComponent(Kcari, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(bt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(dataibuLayout.createSequentialGroup()
-                                .addComponent(bt_tambahdata, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(bt_ubahdata, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(bt_hapusdata, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 594, Short.MAX_VALUE))))
-        );
-        dataibuLayout.setVerticalGroup(
-            dataibuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dataibuLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(dataibuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Kcari, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(dataibuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bt_tambahdata, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_hapusdata, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_ubahdata, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ombre-7419016_1280 (1).jpg"))); // NOI18N
+        dataibu.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1830, 970));
 
         mainpanel.add(dataibu, "card2");
 
@@ -234,80 +253,120 @@ public class ibu extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel2.setText("DATA IBU");
-        TU.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, 187, 46));
+        TU.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 187, 46));
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
         jLabel3.setText("ID");
-        TU.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 119, 136, 30));
+        TU.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 136, 30));
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
         jLabel4.setText("NIK");
-        TU.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 136, 30));
+        TU.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 136, 30));
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
         jLabel5.setText("NAMA");
-        TU.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 136, 30));
+        TU.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 136, 30));
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
         jLabel6.setText("TANGGAL LAHIR");
-        TU.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 136, 30));
+        TU.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 170, 30));
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
         jLabel7.setText("ALAMAT");
-        TU.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 136, 40));
+        TU.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 136, 40));
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
         jLabel8.setText("NO TELP");
-        TU.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 136, 30));
+        TU.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 510, 136, 30));
 
+        bt_ubah2.setBackground(new java.awt.Color(0, 0, 204));
+        bt_ubah2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        bt_ubah2.setForeground(new java.awt.Color(255, 255, 255));
         bt_ubah2.setText("UBAH");
+        bt_ubah2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         bt_ubah2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_ubah2ActionPerformed(evt);
             }
         });
-        TU.add(bt_ubah2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 640, 185, 40));
+        TU.add(bt_ubah2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 640, 185, 40));
 
+        bt_batal.setBackground(new java.awt.Color(204, 0, 0));
+        bt_batal.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        bt_batal.setForeground(new java.awt.Color(255, 255, 255));
         bt_batal.setText("BATAL");
+        bt_batal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         bt_batal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_batalActionPerformed(evt);
             }
         });
-        TU.add(bt_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 640, 185, 40));
+        TU.add(bt_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 640, 190, 40));
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
         jLabel9.setText("STATUS");
-        TU.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 136, 30));
+        TU.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 580, 136, 30));
 
         bt_simpan.setText("SIMPAN");
+        bt_simpan.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 0), 1, true));
         bt_simpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_simpanActionPerformed(evt);
             }
         });
-        TU.add(bt_simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 640, 185, 40));
+        TU.add(bt_simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 640, 185, 40));
 
         k_alamat.setColumns(20);
         k_alamat.setRows(5);
+        k_alamat.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jScrollPane3.setViewportView(k_alamat);
 
-        TU.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, 420, -1));
-        TU.add(k_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 570, 420, 50));
+        TU.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, 420, -1));
 
+        k_status.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        TU.add(k_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 570, 420, 50));
+
+        k_id.setFont(new java.awt.Font("Trebuchet MS", 1, 13)); // NOI18N
+        k_id.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         k_id.setText("`");
-        TU.add(k_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 112, 420, 50));
-        TU.add(k_nik, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 420, 50));
+        k_id.setToolTipText("");
+        k_id.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 51)));
+        k_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                k_idActionPerformed(evt);
+            }
+        });
+        TU.add(k_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 420, 50));
 
+        k_nik.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        TU.add(k_nik, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 420, 50));
+
+        k_nama.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         k_nama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 k_namaActionPerformed(evt);
             }
         });
-        TU.add(k_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 420, 50));
-        TU.add(k_tl, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, 420, 50));
-        TU.add(k_notelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 500, 420, 50));
+        TU.add(k_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 250, 420, 50));
+
+        k_notelp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        TU.add(k_notelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 500, 420, 50));
 
         bt_hapus2.setText("HAPUS");
+        bt_hapus2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 102)));
         bt_hapus2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_hapus2ActionPerformed(evt);
             }
         });
-        TU.add(bt_hapus2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 640, 185, 40));
+        TU.add(bt_hapus2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 640, 185, 40));
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/3169210-removebg-preview.png"))); // NOI18N
+        TU.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 120, -1, -1));
+        TU.add(k_tl, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, 280, 50));
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ombre-7419016_1280 (1).jpg"))); // NOI18N
+        TU.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 1920, 1380));
 
         mainpanel.add(TU, "card2");
 
@@ -355,13 +414,16 @@ public class ibu extends javax.swing.JPanel {
     }//GEN-LAST:event_bt_ubahdataActionPerformed
 
     private void bt_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_simpanActionPerformed
-        String sql = "INSERT INTO balita values (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO ibu values (?,?,?,?,?,?,?)";
+        String tampilan = "yyyy-MM-dd";
+        SimpleDateFormat fm = new SimpleDateFormat(tampilan);
+        String Kttl = String.valueOf(fm.format(k_tl.getDate()));
         try {
             PreparedStatement stat = conn.prepareStatement(sql);
             stat.setString(1, k_id.getText());
             stat.setString(2, k_nik.getText());
             stat.setString(3, k_nama.getText());
-            stat.setString(4, k_tl.getText());
+            stat.setString(4, Kttl);
             stat.setString(5, k_alamat.getText());
             stat.setString(6, k_notelp.getText());
             stat.setString(7, k_status.getText());
@@ -372,22 +434,32 @@ public class ibu extends javax.swing.JPanel {
             k_id.requestFocus();
         } catch (SQLException e){
             JOptionPane.showMessageDialog(null, "data gagal disimpan "+e);
+            kosong();
         }
         datatable();
     }//GEN-LAST:event_bt_simpanActionPerformed
 
     private void bt_batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_batalActionPerformed
-        // TODO add your handling code here:
+        mainpanel.removeAll();
+        mainpanel.add(dataibu);
+        mainpanel.repaint();
+        mainpanel.revalidate();
+        kosong();
+        datatable();
+
     }//GEN-LAST:event_bt_batalActionPerformed
 
     private void bt_ubah2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_ubah2ActionPerformed
+        String tampilan = "yyyy-MM-dd";
+        SimpleDateFormat fm = new SimpleDateFormat(tampilan);
+        String Kttl = String.valueOf(fm.format(k_tl.getDate()));
         try{
-            String sql = "UPDATE balita set ID=?,NIK=?,NAMA=?,TANGGAL LAHIR=?,ALAMAT=?,NO TELPON=?,STATUS=? where ID ='"+k_id.getText()+"'";
+            String sql = "UPDATE ibu set id=?,nik=?,nama=?,tl=?,alamat=?,notelp=?,status=? where id ='"+k_id.getText()+"'";
             PreparedStatement stat = conn.prepareStatement(sql);
             stat.setString(1, k_id.getText());
             stat.setString(2, k_nik.getText());
             stat.setString(3, k_nama.getText());
-            stat.setString(4, k_tl.getText());
+            stat.setString(4, Kttl);
             stat.setString(5, k_alamat.getText());
             stat.setString(6, k_notelp.getText());
             stat.setString(7, k_status.getText());
@@ -399,6 +471,7 @@ public class ibu extends javax.swing.JPanel {
             
         }catch(SQLException e){
             JOptionPane.showMessageDialog(null, "data gagal diubah"+ e);
+            kosong();
         }
         datatable();
     }//GEN-LAST:event_bt_ubah2ActionPerformed
@@ -410,7 +483,7 @@ public class ibu extends javax.swing.JPanel {
     private void bt_hapus2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_hapus2ActionPerformed
         int ok = JOptionPane.showConfirmDialog(null, "hapus", " yakin ingin menghapus?", JOptionPane.YES_NO_OPTION);
         if (ok == 0){
-            String sql = "DELETE FROM balita WHERE id = '"+k_id.getText()+"'";
+            String sql = "DELETE FROM ibu WHERE id = '"+k_id.getText()+"'";
             try {
                 PreparedStatement stat = conn.prepareStatement(sql);
                 stat.executeUpdate();
@@ -423,6 +496,128 @@ public class ibu extends javax.swing.JPanel {
             datatable();
         }
     }//GEN-LAST:event_bt_hapus2ActionPerformed
+
+    private void bt_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cariActionPerformed
+        // TODO add your handling code here:
+         String findItem = Kcari.getText();
+         try{
+            String sql = "SELECT * FROM ibu where id like '%"+findItem+ "%' or nik like '%" + findItem + "%' or nama like '%" + findItem + "%' order by id asc";
+            java.sql.Statement stat = conn.createStatement();
+            ResultSet hasil = stat.executeQuery(sql);
+             while (hasil.next()){ 
+                  tabmode.addRow(new Object[]{ 
+                    hasil.getString(1),
+                    hasil.getString(2),
+                    hasil.getString(3),
+                    hasil.getString(4),
+                    hasil.getString(5),
+                    hasil.getString(6),
+                    hasil.getString(7)
+                });
+             }
+             Tibu.setModel(tabmode);
+        } catch (Exception e) { 
+            
+          }
+        datatable();
+    }//GEN-LAST:event_bt_cariActionPerformed
+
+    private void bt_cariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_bt_cariKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_cariKeyReleased
+
+    private void KcariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KcariActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_KcariActionPerformed
+
+    private void KcariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KcariKeyReleased
+        // TODO add your handling code here:
+         String findItem = Kcari.getText();
+         try{
+            String sql = "SELECT * FROM ibu where id like '%"+findItem+ "%' or nik like '%" + findItem + "%' or nama like '%" + findItem + "%' order by id asc";
+            java.sql.Statement stat = conn.createStatement();
+            ResultSet hasil = stat.executeQuery(sql);
+             while (hasil.next()){ 
+                  tabmode.addRow(new Object[]{ 
+                    hasil.getString(1),
+                    hasil.getString(2),
+                    hasil.getString(3),
+                    hasil.getString(4),
+                    hasil.getString(5),
+                    hasil.getString(6),
+                    hasil.getString(7)
+                });
+             }
+             Tibu.setModel(tabmode);
+        } catch (Exception e) { 
+            
+          }
+        datatable();
+    }//GEN-LAST:event_KcariKeyReleased
+
+    private void k_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_k_idActionPerformed
+        String tampilan = "yyyy-MM-dd";
+        SimpleDateFormat fm = new SimpleDateFormat(tampilan);
+        String Kttl = String.valueOf(fm.format(k_tl.getDate()));
+        try {
+            String sql = "upadate ibu set k_id='"+1+"',k_nik='"+2+"',k_nama='"+3+"',k_tl='"+4+"',k_alamat='"+5+"',k_notelp='"+6+"',k_status='"+7+"' ";
+            PreparedStatement stat = conn.prepareStatement(sql);
+            stat.setString(1, k_id.getText());
+            stat.setString(2, k_nik.getText());
+            stat.setString(3, k_nama.getText());
+            stat.setString(4, Kttl);
+            stat.setString(5, k_alamat.getText());
+            stat.setString(6, k_notelp.getText());
+            stat.setString(7, k_status.getText());
+            
+            stat.executeUpdate();
+            JOptionPane.showMessageDialog(null, "data berhasil disimpan");
+            kosong();
+            k_id.requestFocus();
+            
+       }catch (Exception e) {
+         JOptionPane.showMessageDialog(null, e);
+
+       }
+    }//GEN-LAST:event_k_idActionPerformed
+
+    private void TibuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TibuMouseClicked
+         int bar = Tibu.getSelectedRow();
+        String a = tabmode.getValueAt (bar, 0).toString();
+        String b = tabmode.getValueAt (bar, 1).toString();
+        String c = tabmode.getValueAt (bar, 2).toString();
+        String d = tabmode.getValueAt (bar, 3).toString();
+        String e = tabmode.getValueAt (bar, 4).toString();
+        String f = tabmode.getValueAt (bar, 5).toString();
+        String g = tabmode.getValueAt (bar, 6).toString();
+        
+        
+        
+//        String tampilan = "dd MMM yyyy";
+//        SimpleDateFormat fm = new SimpleDateFormat(tampilan);
+//        String Kttl = String.valueOf(fm.format(c));
+        //txttl1.setDateFormatString(Kttl);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            java.util.Date date = formatter.parse(d);
+            k_tl.setDate(date);
+            
+            
+//        java.util.Date date = formater.parse(b);
+        } catch (ParseException ex) {
+            Logger.getLogger(ibu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+       // k_id.setText(a);
+       
+        k_id.setText(a);
+        k_nik.setText(b);
+        k_nama.setText(c);
+        k_alamat.setText(e);
+        k_notelp.setText(f);
+        k_status.setText(g);
+        
+    }//GEN-LAST:event_TibuMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -439,6 +634,9 @@ public class ibu extends javax.swing.JPanel {
     private javax.swing.JButton bt_ubahdata;
     private javax.swing.JPanel dataibu;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -455,7 +653,7 @@ public class ibu extends javax.swing.JPanel {
     private javax.swing.JTextField k_nik;
     private javax.swing.JTextField k_notelp;
     private javax.swing.JTextField k_status;
-    private javax.swing.JTextField k_tl;
+    private com.toedter.calendar.JDateChooser k_tl;
     private javax.swing.JPanel mainpanel;
     // End of variables declaration//GEN-END:variables
 }
