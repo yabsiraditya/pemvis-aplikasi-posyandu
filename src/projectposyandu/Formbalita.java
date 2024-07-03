@@ -8,6 +8,14 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Locale;
+import java.util.Date;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import koneksi.koneksi;
 /**
  *
@@ -23,27 +31,34 @@ public class Formbalita extends javax.swing.JPanel {
         datatable();
         kosong();
         aktif();
+        bt_hapusdata.setEnabled(false);
+        
     }
     
     protected void aktif(){
-        Kid.requestFocus();
+        //k_id.requestFocus();
     }
     protected void kosong(){
-        Kid.setText("");
-        KNama.setText("");
-        Kttl.setText("");
-        Kjk.setText("");
-        Kibu.setText("");
-        Kalamat.setText("");
+        //k_id.setText("");
+        k_id.setText("");
+        k_name.setText("");
+        k_nik.setText("");
+        //Kttl.setText("");
+        rjk1.setSelected(false);
+        rjk2.setSelected(false);
+        k_tl.setCalendar(null);
+       
+        //k_ibu.setSelectedItem("");
+        //k_alamat.setText("");
         
     }
     protected void datatable(){
-        Object[] Baris = {"id","Nama","Tanggal Lahir", "Jenis Kelamin", "Ibu", "Alamat"};
+        Object[] Baris = {"Kode Balita","NIK","Nama", "Jenis Kelamin", "Tanggal Lahir"};
         tabmode = new DefaultTableModel (null, Baris);
         
-        String cari = Kcari.getText();
+        String cari = k_cari.getText();
         try {
-            String sql = "SELECT * FROM balita where id like '%"+cari+"%' or Nama like '%"+cari+"%' order by id asc";
+            String sql = "SELECT * FROM balita where kd_balita like '%"+cari+"%' or nama like '%"+cari+"%' order by kd_balita asc";
             Statement stat = conn.createStatement();
             ResultSet hasil = stat.executeQuery(sql);
             while (hasil.next()){
@@ -53,7 +68,6 @@ public class Formbalita extends javax.swing.JPanel {
                     hasil.getString(3),
                     hasil.getString(4),
                     hasil.getString(5),
-                    hasil.getString(6)
                 
                 });
             }
@@ -75,128 +89,135 @@ public class Formbalita extends javax.swing.JPanel {
 
         mainpanel = new javax.swing.JPanel();
         dataBalita = new javax.swing.JPanel();
+        bt_tambahdata = new javax.swing.JButton();
+        bt_ubahdata = new javax.swing.JButton();
+        bt_hapusdata = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tbalita = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        bt_tambahdata = new javax.swing.JButton();
+        label_databalita = new javax.swing.JLabel();
         bt_hapus = new javax.swing.JButton();
-        bt_Ubah = new javax.swing.JButton();
-        Kcari = new javax.swing.JTextField();
-        bt_cari = new javax.swing.JButton();
-        tambahBalita = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        bt_simpan = new javax.swing.JButton();
-        bt_batal = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        KNama = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        Kid = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        Kttl = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        Kjk = new javax.swing.JTextField();
-        Kibu = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        Kalamat = new javax.swing.JTextField();
-        ubahbalita = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        bt_ubah = new javax.swing.JButton();
-        bt_batal1 = new javax.swing.JButton();
+        k_cari = new javax.swing.JTextField();
+        btn_cari = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        KNama1 = new javax.swing.JTextField();
+        tambahBalita = new javax.swing.JPanel();
+        k_name = new javax.swing.JTextField();
+        k_id = new javax.swing.JFormattedTextField();
+        k_nik = new javax.swing.JFormattedTextField();
+        k_tl = new com.toedter.calendar.JDateChooser();
+        label_data = new javax.swing.JLabel();
+        label_nama = new javax.swing.JLabel();
+        label_id = new javax.swing.JLabel();
+        label_tanggallahir = new javax.swing.JLabel();
+        label_nik = new javax.swing.JLabel();
+        label_tanggallahir1 = new javax.swing.JLabel();
+        btn_simpan = new javax.swing.JButton();
+        bt_batal = new javax.swing.JButton();
+        btn_hapus = new javax.swing.JButton();
+        btn_ubah = new javax.swing.JButton();
+        rjk1 = new javax.swing.JRadioButton();
+        rjk2 = new javax.swing.JRadioButton();
         jLabel11 = new javax.swing.JLabel();
-        Kid1 = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        Kttl1 = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        Kjk1 = new javax.swing.JTextField();
-        Kibu1 = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        Kalamat1 = new javax.swing.JTextField();
-        hapusbalita = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
-        bt_hapusdata = new javax.swing.JButton();
-        bt_batal2 = new javax.swing.JButton();
-        jLabel17 = new javax.swing.JLabel();
-        KNama2 = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
-        Kid2 = new javax.swing.JTextField();
-        jLabel19 = new javax.swing.JLabel();
-        Kttl2 = new javax.swing.JTextField();
-        jLabel20 = new javax.swing.JLabel();
-        Kjk2 = new javax.swing.JTextField();
-        Kibu2 = new javax.swing.JTextField();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        Kalamat2 = new javax.swing.JTextField();
 
         setLayout(new java.awt.CardLayout());
 
         mainpanel.setLayout(new java.awt.CardLayout());
 
-        Tbalita.setFont(new java.awt.Font("Segoe UI Variable", 1, 13)); // NOI18N
-        Tbalita.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "NAMA", "Tanggal Lahir", "Jenis Kelamin", "Ibu", "Alamat"
-            }
-        ));
-        Tbalita.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Tbalita.setIntercellSpacing(new java.awt.Dimension(5, 10));
-        Tbalita.setRowHeight(25);
-        jScrollPane1.setViewportView(Tbalita);
-        if (Tbalita.getColumnModel().getColumnCount() > 0) {
-            Tbalita.getColumnModel().getColumn(0).setHeaderValue("NAMA");
-            Tbalita.getColumnModel().getColumn(1).setHeaderValue("Tanggal Lahir");
-            Tbalita.getColumnModel().getColumn(2).setHeaderValue("Jenis Kelamin");
-            Tbalita.getColumnModel().getColumn(3).setHeaderValue("Ibu");
-            Tbalita.getColumnModel().getColumn(4).setHeaderValue("Alamat");
-        }
+        dataBalita.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        jLabel1.setText("DATA BALITA");
-
+        bt_tambahdata.setBackground(new java.awt.Color(7, 155, 7));
+        bt_tambahdata.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        bt_tambahdata.setForeground(new java.awt.Color(255, 255, 255));
         bt_tambahdata.setText("Tambah Data");
+        bt_tambahdata.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
         bt_tambahdata.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_tambahdataActionPerformed(evt);
             }
         });
+        dataBalita.add(bt_tambahdata, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 800, 172, 42));
+
+        bt_ubahdata.setBackground(new java.awt.Color(123, 123, 215));
+        bt_ubahdata.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        bt_ubahdata.setForeground(new java.awt.Color(255, 255, 255));
+        bt_ubahdata.setText("Ubah Data");
+        bt_ubahdata.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255)));
+        bt_ubahdata.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_ubahdataActionPerformed(evt);
+            }
+        });
+        dataBalita.add(bt_ubahdata, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 800, 172, 42));
+
+        bt_hapusdata.setBackground(new java.awt.Color(255, 0, 51));
+        bt_hapusdata.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        bt_hapusdata.setForeground(new java.awt.Color(255, 255, 255));
+        bt_hapusdata.setText("Hapus Data");
+        bt_hapusdata.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bt_hapusdata.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_hapusdataActionPerformed(evt);
+            }
+        });
+        dataBalita.add(bt_hapusdata, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 800, 172, 42));
+
+        Tbalita.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Tbalita.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        Tbalita.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Id", "Nama", "Tanggal Lahir", "Jenis Kelamin", "Ibu", "Alamat"
+            }
+        ));
+        Tbalita.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Tbalita.setIntercellSpacing(new java.awt.Dimension(5, 10));
+        Tbalita.setMinimumSize(new java.awt.Dimension(105, 800));
+        Tbalita.setPreferredSize(new java.awt.Dimension(525, 800));
+        Tbalita.setRowHeight(25);
+        Tbalita.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TbalitaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(Tbalita);
+
+        dataBalita.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 120, 1037, 652));
+
+        label_databalita.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        label_databalita.setText("DATA BALITA");
+        dataBalita.add(label_databalita, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 8, 187, 46));
 
         bt_hapus.setText("Hapus Data");
         bt_hapus.addActionListener(new java.awt.event.ActionListener() {
@@ -204,71 +225,109 @@ public class Formbalita extends javax.swing.JPanel {
                 bt_hapusActionPerformed(evt);
             }
         });
+        dataBalita.add(bt_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 1917, 172, 42));
 
-        bt_Ubah.setText("Ubah Data");
-        bt_Ubah.addActionListener(new java.awt.event.ActionListener() {
+        k_cari.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        k_cari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_UbahActionPerformed(evt);
+                k_cariActionPerformed(evt);
             }
         });
+        k_cari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                k_cariKeyReleased(evt);
+            }
+        });
+        dataBalita.add(k_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 294, 36));
 
-        bt_cari.setText("CARI");
+        btn_cari.setBackground(new java.awt.Color(153, 153, 153));
+        btn_cari.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        btn_cari.setText("CARI");
+        btn_cari.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btn_cari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cariActionPerformed(evt);
+            }
+        });
+        btn_cari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                btn_cariKeyReleased(evt);
+            }
+        });
+        dataBalita.add(btn_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 123, 36));
 
-        javax.swing.GroupLayout dataBalitaLayout = new javax.swing.GroupLayout(dataBalita);
-        dataBalita.setLayout(dataBalitaLayout);
-        dataBalitaLayout.setHorizontalGroup(
-            dataBalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dataBalitaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(dataBalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1820, Short.MAX_VALUE)
-                    .addGroup(dataBalitaLayout.createSequentialGroup()
-                        .addGroup(dataBalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(dataBalitaLayout.createSequentialGroup()
-                                .addComponent(Kcari, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(bt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(dataBalitaLayout.createSequentialGroup()
-                                .addComponent(bt_tambahdata, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bt_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bt_Ubah, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-        );
-        dataBalitaLayout.setVerticalGroup(
-            dataBalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dataBalitaLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(dataBalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Kcari, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(dataBalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bt_tambahdata, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_Ubah, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(214, Short.MAX_VALUE))
-        );
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ombre-7419016_1280 (1).jpg"))); // NOI18N
+        dataBalita.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1830, 970));
 
         mainpanel.add(dataBalita, "card2");
 
         tambahBalita.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        tambahBalita.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        jLabel2.setText("DATA BALITA");
-
-        bt_simpan.setText("SIMPAN");
-        bt_simpan.addActionListener(new java.awt.event.ActionListener() {
+        k_name.setFont(new java.awt.Font("Trebuchet MS", 1, 13)); // NOI18N
+        k_name.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        k_name.setText("`");
+        k_name.setToolTipText("");
+        k_name.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 51)));
+        k_name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_simpanActionPerformed(evt);
+                k_nameActionPerformed(evt);
             }
         });
+        tambahBalita.add(k_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 250, 420, 50));
+
+        k_id.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        k_id.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("######"))));
+        k_id.setFont(new java.awt.Font("Trebuchet MS", 1, 13)); // NOI18N
+        k_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                k_idActionPerformed(evt);
+            }
+        });
+        tambahBalita.add(k_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, 420, 50));
+
+        k_nik.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        k_nik.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("######"))));
+        k_nik.setFont(new java.awt.Font("Trebuchet MS", 1, 13)); // NOI18N
+        k_nik.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                k_nikActionPerformed(evt);
+            }
+        });
+        tambahBalita.add(k_nik, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 420, 50));
+        tambahBalita.add(k_tl, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, 280, 50));
+
+        label_data.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        label_data.setText("DATA BALITA");
+        tambahBalita.add(label_data, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, 187, 46));
+
+        label_nama.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
+        label_nama.setText("NAMA");
+        tambahBalita.add(label_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 136, 30));
+
+        label_id.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
+        label_id.setText("ID");
+        tambahBalita.add(label_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 136, 30));
+
+        label_tanggallahir.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
+        label_tanggallahir.setText("Tanggal Lahir");
+        tambahBalita.add(label_tanggallahir, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 136, 30));
+
+        label_nik.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
+        label_nik.setText("NIK");
+        tambahBalita.add(label_nik, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 136, 30));
+
+        label_tanggallahir1.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
+        label_tanggallahir1.setText("Jenis Kelamin");
+        tambahBalita.add(label_tanggallahir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 136, 30));
+
+        btn_simpan.setText("SIMPAN");
+        btn_simpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_simpanActionPerformed(evt);
+            }
+        });
+        tambahBalita.add(btn_simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 450, 185, 40));
 
         bt_batal.setText("BATAL");
         bt_batal.addActionListener(new java.awt.event.ActionListener() {
@@ -276,374 +335,149 @@ public class Formbalita extends javax.swing.JPanel {
                 bt_batalActionPerformed(evt);
             }
         });
+        tambahBalita.add(bt_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(525, 450, 185, 40));
 
-        jLabel3.setText("id");
-
-        KNama.setText("jTextField1");
-
-        jLabel4.setText("Nama");
-
-        Kid.setText("jTextField2");
-
-        jLabel5.setText("Tanggal Lahir");
-
-        Kttl.setText("jTextField1");
-
-        jLabel6.setText("Jenis Kelamin");
-
-        Kjk.setText("jTextField1");
-
-        Kibu.setText("jTextField1");
-        Kibu.addActionListener(new java.awt.event.ActionListener() {
+        btn_hapus.setText("Hapus");
+        btn_hapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                KibuActionPerformed(evt);
+                btn_hapusActionPerformed(evt);
             }
         });
+        tambahBalita.add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 450, 185, 40));
 
-        jLabel7.setText("Ibu");
-
-        jLabel8.setText("Alamat ");
-
-        Kalamat.setText("jTextField6");
-
-        javax.swing.GroupLayout tambahBalitaLayout = new javax.swing.GroupLayout(tambahBalita);
-        tambahBalita.setLayout(tambahBalitaLayout);
-        tambahBalitaLayout.setHorizontalGroup(
-            tambahBalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tambahBalitaLayout.createSequentialGroup()
-                .addGroup(tambahBalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tambahBalitaLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(tambahBalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(tambahBalitaLayout.createSequentialGroup()
-                                .addComponent(bt_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(bt_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(tambahBalitaLayout.createSequentialGroup()
-                                .addGroup(tambahBalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(tambahBalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(29, 29, 29)
-                                .addGroup(tambahBalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(KNama)
-                                    .addComponent(Kid)
-                                    .addComponent(Kttl, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
-                                    .addComponent(Kjk, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
-                                    .addComponent(Kibu, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
-                                    .addComponent(Kalamat)))))
-                    .addGroup(tambahBalitaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(1136, Short.MAX_VALUE))
-        );
-        tambahBalitaLayout.setVerticalGroup(
-            tambahBalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tambahBalitaLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88)
-                .addGroup(tambahBalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Kid, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(27, 27, 27)
-                .addGroup(tambahBalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(KNama, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(28, 28, 28)
-                .addGroup(tambahBalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Kttl, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(tambahBalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Kjk, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(tambahBalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Kibu, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(tambahBalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(tambahBalitaLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(Kalamat, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(tambahBalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bt_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(465, Short.MAX_VALUE))
-        );
-
-        mainpanel.add(tambahBalita, "card2");
-
-        ubahbalita.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        jLabel9.setText("DATA BALITA");
-
-        bt_ubah.setText("UBAH");
-        bt_ubah.addActionListener(new java.awt.event.ActionListener() {
+        btn_ubah.setText("Ubah");
+        btn_ubah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_ubahActionPerformed(evt);
+                btn_ubahActionPerformed(evt);
             }
         });
+        tambahBalita.add(btn_ubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 450, 185, 40));
 
-        bt_batal1.setText("BATAL");
-        bt_batal1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_batal1ActionPerformed(evt);
-            }
-        });
+        rjk1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        rjk1.setText("Laki-Laki");
+        tambahBalita.add(rjk1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 400, -1, -1));
 
-        jLabel10.setText("id");
+        rjk2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        rjk2.setText("Perempuan");
+        tambahBalita.add(rjk2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 400, -1, -1));
 
-        jLabel11.setText("Nama");
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ombre-7419016_1280 (1).jpg"))); // NOI18N
+        jLabel11.setText("l");
+        tambahBalita.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 1920, 1380));
 
-        jLabel12.setText("Tanggal Lahir");
-
-        jLabel13.setText("Jenis Kelamin");
-
-        Kibu1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Kibu1ActionPerformed(evt);
-            }
-        });
-
-        jLabel14.setText("Ibu");
-
-        jLabel15.setText("Alamat ");
-
-        javax.swing.GroupLayout ubahbalitaLayout = new javax.swing.GroupLayout(ubahbalita);
-        ubahbalita.setLayout(ubahbalitaLayout);
-        ubahbalitaLayout.setHorizontalGroup(
-            ubahbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ubahbalitaLayout.createSequentialGroup()
-                .addGroup(ubahbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ubahbalitaLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(ubahbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ubahbalitaLayout.createSequentialGroup()
-                                .addComponent(bt_ubah, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(bt_batal1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(ubahbalitaLayout.createSequentialGroup()
-                                .addGroup(ubahbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(ubahbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(29, 29, 29)
-                                .addGroup(ubahbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(KNama1)
-                                    .addComponent(Kid1)
-                                    .addComponent(Kttl1, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
-                                    .addComponent(Kjk1, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
-                                    .addComponent(Kibu1, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
-                                    .addComponent(Kalamat1)))))
-                    .addGroup(ubahbalitaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(1136, Short.MAX_VALUE))
-        );
-        ubahbalitaLayout.setVerticalGroup(
-            ubahbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ubahbalitaLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88)
-                .addGroup(ubahbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Kid1, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(27, 27, 27)
-                .addGroup(ubahbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(KNama1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addGap(28, 28, 28)
-                .addGroup(ubahbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Kttl1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(ubahbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Kjk1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(ubahbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Kibu1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(ubahbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(ubahbalitaLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(Kalamat1, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(ubahbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bt_ubah, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_batal1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(465, Short.MAX_VALUE))
-        );
-
-        mainpanel.add(ubahbalita, "card2");
-
-        hapusbalita.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-
-        jLabel16.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        jLabel16.setText("DATA BALITA");
-
-        bt_hapusdata.setText("HAPUS");
-        bt_hapusdata.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_hapusdataActionPerformed(evt);
-            }
-        });
-
-        bt_batal2.setText("BATAL");
-        bt_batal2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_batal2ActionPerformed(evt);
-            }
-        });
-
-        jLabel17.setText("id");
-
-        jLabel18.setText("Nama");
-
-        jLabel19.setText("Tanggal Lahir");
-
-        jLabel20.setText("Jenis Kelamin");
-
-        Kibu2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Kibu2ActionPerformed(evt);
-            }
-        });
-
-        jLabel21.setText("Ibu");
-
-        jLabel22.setText("Alamat ");
-
-        javax.swing.GroupLayout hapusbalitaLayout = new javax.swing.GroupLayout(hapusbalita);
-        hapusbalita.setLayout(hapusbalitaLayout);
-        hapusbalitaLayout.setHorizontalGroup(
-            hapusbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hapusbalitaLayout.createSequentialGroup()
-                .addGroup(hapusbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(hapusbalitaLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(hapusbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(hapusbalitaLayout.createSequentialGroup()
-                                .addComponent(bt_hapusdata, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(bt_batal2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(hapusbalitaLayout.createSequentialGroup()
-                                .addGroup(hapusbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(hapusbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(29, 29, 29)
-                                .addGroup(hapusbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(KNama2)
-                                    .addComponent(Kid2)
-                                    .addComponent(Kttl2, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
-                                    .addComponent(Kjk2, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
-                                    .addComponent(Kibu2, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
-                                    .addComponent(Kalamat2)))))
-                    .addGroup(hapusbalitaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(1136, Short.MAX_VALUE))
-        );
-        hapusbalitaLayout.setVerticalGroup(
-            hapusbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hapusbalitaLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88)
-                .addGroup(hapusbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Kid2, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(27, 27, 27)
-                .addGroup(hapusbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(KNama2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18))
-                .addGap(28, 28, 28)
-                .addGroup(hapusbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Kttl2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(hapusbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Kjk2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(hapusbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Kibu2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(hapusbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(hapusbalitaLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(Kalamat2, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(hapusbalitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bt_hapusdata, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_batal2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(465, Short.MAX_VALUE))
-        );
-
-        mainpanel.add(hapusbalita, "card2");
+        mainpanel.add(tambahBalita, "card3");
 
         add(mainpanel, "card2");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bt_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_simpanActionPerformed
-       String sql = "INSERT INTO balita values (?,?,?,?,?,?)";
-        try {
-            PreparedStatement stat = conn.prepareStatement(sql);
-            stat.setString(1, Kid.getText());
-            stat.setString(2, KNama.getText());
-            stat.setString(3, Kttl.getText());
-            stat.setString(4, Kjk.getText());
-            stat.setString(5, Kibu.getText());
-            stat.setString(6, Kalamat.getText());
-            
-            stat.executeUpdate();
-            JOptionPane.showMessageDialog(null, "data berhasil disimpan");
-            kosong();
-            Kid.requestFocus();
-        } catch (SQLException e){
-            JOptionPane.showMessageDialog(null, "data gagal disimpan "+e);
+    private void bt_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_hapusActionPerformed
+        int ok = JOptionPane.showConfirmDialog(null, "hapus", " yakin ingin menghapus?", JOptionPane.YES_NO_OPTION);
+        if (ok == 0){
+            System.out.println(k_id);
+            String sql = "DELETE FROM balita WHERE kd_balita ="+ k_id.getText() ;
+            try {
+                PreparedStatement stat = conn.prepareStatement(sql);
+                stat.executeUpdate();
+                JOptionPane.showMessageDialog(null, "data berhasil dihapus");
+                kosong();
+//                k_id.requestFocus();
+            }catch(SQLException e){
+                JOptionPane.showMessageDialog(null, "data gagal dihapus"+ e);
+            }
         }
         datatable();
-    }//GEN-LAST:event_bt_simpanActionPerformed
+        
+    }//GEN-LAST:event_bt_hapusActionPerformed
 
-    private void KibuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KibuActionPerformed
+    private void TbalitaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbalitaMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_KibuActionPerformed
+        
+        int bar = Tbalita.getSelectedRow();
+        String a = tabmode.getValueAt (bar, 0).toString();
+        String b = tabmode.getValueAt (bar, 1).toString();
+        String c = tabmode.getValueAt (bar, 2).toString();
+        String d = tabmode.getValueAt (bar, 3).toString();
+        String e = tabmode.getValueAt (bar, 4).toString();
+        
+        
+//        String tampilan = "dd MMM yyyy";
+//        SimpleDateFormat fm = new SimpleDateFormat(tampilan);
+//        String Kttl = String.valueOf(fm.format(c));
+        //txttl1.setDateFormatString(Kttl);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = formatter.parse(e);
+            k_tl.setDate(date);
+            
+            
+//        java.util.Date date = formater.parse(b);
+        } catch (ParseException ex) {
+            Logger.getLogger(Formbalita.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+       // k_id.setText(a);
+       if(d.equals("Laki-Laki")) {rjk1.setSelected(true); rjk2.setSelected(false);}
+        else {rjk1.setSelected(false); rjk2.setSelected(true);} 
+        k_id.setText(a);
+        k_nik.setText(b);
+        k_name.setText(c);
+        
+        bt_hapusdata.setEnabled(true);
+        
 
-    private void bt_tambahdataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_tambahdataActionPerformed
-        mainpanel.removeAll();
-        mainpanel.repaint();
-        mainpanel.revalidate();
-        
-        mainpanel.add(tambahBalita);
-        mainpanel.repaint();
-        mainpanel.revalidate();
-        
-        
-    }//GEN-LAST:event_bt_tambahdataActionPerformed
+      
+    }//GEN-LAST:event_TbalitaMouseClicked
+
+    private void btn_ubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ubahActionPerformed
+        // TODO add your handling code here:
+        try{
+            String tampilan = "yyyy-MM-dd";
+            SimpleDateFormat fm = new SimpleDateFormat(tampilan);
+            String Kttl = String.valueOf(fm.format(k_tl.getDate()));
+            String jkel="";
+            if(rjk1.isSelected()) jkel="Laki-Laki";
+            else jkel="Perempuan";
+            //            String ibu = k_ibu.getSelectedItem().toString();
+
+            String sql = "UPDATE balita set `nama`=?,`nik`=?,`tgl_lahir`=?,`jenis_kelamin`=? WHERE `kd_balita`=" + k_id.getText();
+            PreparedStatement stat = conn.prepareStatement(sql);
+            stat.setString(1, k_name.getText());
+            stat.setString(2, k_id.getText());
+            stat.setString(3, Kttl);
+            stat.setString(4, jkel);
+            stat.executeUpdate();
+            JOptionPane.showMessageDialog(null, "DATA BERHASIL DIUBAH");
+            mainpanel.removeAll();
+            mainpanel.add(dataBalita);
+            mainpanel.repaint();
+            mainpanel.revalidate();
+            datatable();
+            kosong();
+            //   k_id.requestFocus();
+
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "data gagal diubah"+ e);
+        }
+
+    }//GEN-LAST:event_btn_ubahActionPerformed
+
+    private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
+        // TODO add your handling code here:
+        int ok = JOptionPane.showConfirmDialog(null, "hapus", " yakin ingin menghapus?", JOptionPane.YES_NO_OPTION);
+        if (ok == 0){
+            String sql = "DELETE FROM balita WHERE id = '"+"'";
+            try {
+                PreparedStatement stat = conn.prepareStatement(sql);
+                stat.executeUpdate();
+                JOptionPane.showMessageDialog(null, "data berhasil dihapus");
+                kosong();
+                //                k_id.requestFocus();
+            }catch(SQLException e){
+                JOptionPane.showMessageDialog(null, "data gagal dihapus"+ e);
+            }
+            datatable();
+        }
+    }//GEN-LAST:event_btn_hapusActionPerformed
 
     private void bt_batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_batalActionPerformed
         mainpanel.removeAll();
@@ -654,158 +488,198 @@ public class Formbalita extends javax.swing.JPanel {
         datatable();
     }//GEN-LAST:event_bt_batalActionPerformed
 
-    private void bt_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_hapusActionPerformed
-        mainpanel.removeAll();
-        mainpanel.repaint();
-        mainpanel.revalidate();
-        
-        mainpanel.add(hapusbalita);
-        mainpanel.repaint();
-        
-    }//GEN-LAST:event_bt_hapusActionPerformed
+    private void btn_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanActionPerformed
 
-    private void bt_ubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_ubahActionPerformed
-        mainpanel.removeAll();
-        mainpanel.repaint();
-        mainpanel.revalidate();
+        String jkel="";
+            if(rjk1.isSelected()) {
+                jkel="Laki-Laki";
+                rjk2.setSelected(false);
+            }
+            else {
+                jkel="Perempuan";
+                rjk1.setSelected(false);
+            }
+            
+
         
-        mainpanel.add(ubahbalita);
-        mainpanel.repaint();
-        mainpanel.revalidate();
-        try{
-            String sql = "UPDATE balita set id=?,Nama=?,Tanggal Lahir=?,Jenis Kelamin=?,Ibu=?,Alamat=? where id ='"+Kid.getText()+"'";
-            PreparedStatement stat = conn.prepareStatement(sql);
-            stat.setString(1, Kid.getText());
-            stat.setString(2, KNama.getText());
-            stat.setString(3, Kttl.getText());
-            stat.setString(4, Kjk.getText());
-            stat.setString(5, Kibu.getText());
-            stat.setString(6, Kalamat.getText());
-            
-            stat.executeUpdate();
-            JOptionPane.showMessageDialog(null, "DATA BERHASIL DI UBAH");
-            kosong();
-            Kid.requestFocus();
-            
-        }catch(SQLException e){
-            JOptionPane.showMessageDialog(null, "data gagal diubah"+ e);
+        if(!k_id.getText().equals("") && !k_nik.getText().equals("") && !k_name.getText().equals("") && !jkel.equals("") && !k_tl.getDate().equals(null)) {
+                    String tampilan = "yyyy-MM-dd";
+                    SimpleDateFormat fm = new SimpleDateFormat(tampilan);
+                    String Kttl = String.valueOf(fm.format(k_tl.getDate()));
+            try {
+            String sqlnik = "SELECT nik from balita where nik=" + k_nik.getText();
+            java.sql.Statement statnik = conn.createStatement();
+            ResultSet hasil = statnik.executeQuery(sqlnik);
+              if(!hasil.isBeforeFirst()) {
+                        String sql = "INSERT INTO balita values (?,?,?,?,?)";
+                        PreparedStatement stat = conn.prepareStatement(sql);
+                        stat.setString(1, k_id.getText());
+                        stat.setString(2, k_nik.getText());
+                        stat.setString(3, k_name.getText());
+                        stat.setString(4, jkel);
+                        stat.setString(5, Kttl);
+
+                        stat.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "data berhasil disimpan");
+                        mainpanel.removeAll();
+                        mainpanel.add(dataBalita);
+                        mainpanel.repaint();
+                        mainpanel.revalidate();
+                       
+              } else {
+                  JOptionPane.showMessageDialog(null, "NIK yang diinput sudah terdaftar!");
+                  k_nik.setText("");
+              }
+        } catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "data gagal disimpan "+e);
+        }
+        } else {
+            JOptionPane.showMessageDialog(null, "Isi semua kolom yang tersedia!");
         }
         datatable();
-    }//GEN-LAST:event_bt_ubahActionPerformed
+    }//GEN-LAST:event_btn_simpanActionPerformed
 
-    private void bt_batal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_batal1ActionPerformed
+    private void k_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_k_nameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_k_nameActionPerformed
+
+    private void btn_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariActionPerformed
+        // TODO add your handling code here:
+        String findItem = k_cari.getText();
+       
+    }//GEN-LAST:event_btn_cariActionPerformed
+
+    private void btn_cariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_cariKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_cariKeyReleased
+
+    private void k_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_k_cariActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_k_cariActionPerformed
+
+    private void k_cariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_k_cariKeyReleased
+        // TODO add your handling code here:
+        String findItem = k_cari.getText();
+         try{
+            String sql = "SELECT * FROM balita where `kd_balita` like '%" + findItem + "%' or `nik` like '%" + findItem + "%' or `nama` like '%" + findItem + "%' order by kd_balita asc";
+            java.sql.Statement stat = conn.createStatement();
+            ResultSet hasil = stat.executeQuery(sql);
+             while (hasil.next()){ 
+                  tabmode.addRow(new Object[]{ 
+                    hasil.getString(1), 
+                    hasil.getString(2), 
+                    hasil.getString(3), 
+                    hasil.getString(4), 
+                    hasil.getString(5) 
+                });
+             }
+             Tbalita.setModel(tabmode);
+        } catch (Exception e) { 
+            
+          }
+        datatable();
+    }//GEN-LAST:event_k_cariKeyReleased
+
+    private void bt_tambahdataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_tambahdataActionPerformed
         mainpanel.removeAll();
-        mainpanel.add(dataBalita);
         mainpanel.repaint();
         mainpanel.revalidate();
-        kosong();
-        datatable();
-    }//GEN-LAST:event_bt_batal1ActionPerformed
+        
+        mainpanel.add(tambahBalita);
+        mainpanel.repaint();
+        mainpanel.revalidate();
+        btn_simpan.setVisible(true);
+        btn_ubah.setVisible(false);
+        btn_hapus.setVisible(false);
+        
+        k_id.setEditable(false);
+        Random rand = new Random();
+        Integer random = rand.nextInt(100000);
+        k_id.setText(random.toString());
+        
+       
+        
+    }//GEN-LAST:event_bt_tambahdataActionPerformed
 
-    private void Kibu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Kibu1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Kibu1ActionPerformed
+    private void bt_ubahdataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_ubahdataActionPerformed
+      mainpanel.removeAll();
+        mainpanel.repaint();
+        mainpanel.revalidate();
+        
+        mainpanel.add(tambahBalita);
+        mainpanel.repaint();
+        mainpanel.revalidate();
+        btn_ubah.setVisible(true);
+        btn_hapus.setVisible(false);
+        btn_simpan.setVisible(false);
+        
+    }//GEN-LAST:event_bt_ubahdataActionPerformed
 
     private void bt_hapusdataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_hapusdataActionPerformed
-        
-        int ok = JOptionPane.showConfirmDialog(null, "hapus", " yakin ingin menghapus?", JOptionPane.YES_NO_OPTION);
-        if (ok == 0){
-            String sql = "DELETE FROM balita WHERE id = '"+Kid.getText()+"'";
-            try {
-                PreparedStatement stat = conn.prepareStatement(sql);
-                stat.executeUpdate();
-                JOptionPane.showMessageDialog(null, "data berhasil dihapus");
-                kosong();
-                Kid.requestFocus();
-            }catch(SQLException e){
-                JOptionPane.showMessageDialog(null, "data gagal dihapus"+ e);
+
+        if(!k_id.getText().equals("") && !k_id.getText().isEmpty()) {
+            bt_hapusdata.setEnabled(true);
+            int ok = JOptionPane.showConfirmDialog(null, "hapus", " yakin ingin menghapus?", JOptionPane.YES_NO_OPTION);
+            if (ok == 0){
+                System.out.println(k_id);
+                String sql = "DELETE FROM balita WHERE kd_balita ='"+ k_id.getText() + "'" ;
+                try {
+                    PreparedStatement stat = conn.prepareStatement(sql);
+                    stat.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "data berhasil dihapus");
+                    kosong();
+//                k_id.requestFocus();
+                }catch(SQLException e){
+                    JOptionPane.showMessageDialog(null, "data gagal dihapus"+ e);
+                }
             }
-            datatable();
+            datatable();      
+        } else {
+            bt_hapusdata.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "tidak ada data yang dihapus");
         }
+        
     }//GEN-LAST:event_bt_hapusdataActionPerformed
 
-    private void bt_batal2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_batal2ActionPerformed
-        mainpanel.removeAll();
-        mainpanel.add(dataBalita);
-        mainpanel.repaint();
-        mainpanel.revalidate();
-        kosong();
-        datatable();
-    }//GEN-LAST:event_bt_batal2ActionPerformed
-
-    private void Kibu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Kibu2ActionPerformed
+    private void k_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_k_idActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Kibu2ActionPerformed
+    }//GEN-LAST:event_k_idActionPerformed
 
-    private void bt_UbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_UbahActionPerformed
-        mainpanel.removeAll();
-        mainpanel.repaint();
-        mainpanel.revalidate();
-        
-        mainpanel.add(ubahbalita);
-        mainpanel.repaint();
-        mainpanel.revalidate();
-    }//GEN-LAST:event_bt_UbahActionPerformed
+    private void k_nikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_k_nikActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_k_nikActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField KNama;
-    private javax.swing.JTextField KNama1;
-    private javax.swing.JTextField KNama2;
-    private javax.swing.JTextField Kalamat;
-    private javax.swing.JTextField Kalamat1;
-    private javax.swing.JTextField Kalamat2;
-    private javax.swing.JTextField Kcari;
-    private javax.swing.JTextField Kibu;
-    private javax.swing.JTextField Kibu1;
-    private javax.swing.JTextField Kibu2;
-    private javax.swing.JTextField Kid;
-    private javax.swing.JTextField Kid1;
-    private javax.swing.JTextField Kid2;
-    private javax.swing.JTextField Kjk;
-    private javax.swing.JTextField Kjk1;
-    private javax.swing.JTextField Kjk2;
-    private javax.swing.JTextField Kttl;
-    private javax.swing.JTextField Kttl1;
-    private javax.swing.JTextField Kttl2;
     private javax.swing.JTable Tbalita;
-    private javax.swing.JButton bt_Ubah;
     private javax.swing.JButton bt_batal;
-    private javax.swing.JButton bt_batal1;
-    private javax.swing.JButton bt_batal2;
-    private javax.swing.JButton bt_cari;
     private javax.swing.JButton bt_hapus;
     private javax.swing.JButton bt_hapusdata;
-    private javax.swing.JButton bt_simpan;
     private javax.swing.JButton bt_tambahdata;
-    private javax.swing.JButton bt_ubah;
+    private javax.swing.JButton bt_ubahdata;
+    private javax.swing.JButton btn_cari;
+    private javax.swing.JButton btn_hapus;
+    private javax.swing.JButton btn_simpan;
+    private javax.swing.JButton btn_ubah;
     private javax.swing.JPanel dataBalita;
-    private javax.swing.JPanel hapusbalita;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField k_cari;
+    private javax.swing.JFormattedTextField k_id;
+    private javax.swing.JTextField k_name;
+    private javax.swing.JFormattedTextField k_nik;
+    private com.toedter.calendar.JDateChooser k_tl;
+    private javax.swing.JLabel label_data;
+    private javax.swing.JLabel label_databalita;
+    private javax.swing.JLabel label_id;
+    private javax.swing.JLabel label_nama;
+    private javax.swing.JLabel label_nik;
+    private javax.swing.JLabel label_tanggallahir;
+    private javax.swing.JLabel label_tanggallahir1;
     private javax.swing.JPanel mainpanel;
+    private javax.swing.JRadioButton rjk1;
+    private javax.swing.JRadioButton rjk2;
     private javax.swing.JPanel tambahBalita;
-    private javax.swing.JPanel ubahbalita;
     // End of variables declaration//GEN-END:variables
 }

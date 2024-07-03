@@ -18,10 +18,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 /**
  *
- * @author Kelompok 1
+ * @author PREDATOR
  */
 public class main extends javax.swing.JFrame {
 
@@ -31,7 +30,6 @@ public class main extends javax.swing.JFrame {
     public main() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
         execute();
     }
 
@@ -45,6 +43,10 @@ public class main extends javax.swing.JFrame {
     private void initComponents() {
 
         pn_navbar = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         pn_sidebar = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pn_menus = new javax.swing.JPanel();
@@ -52,20 +54,36 @@ public class main extends javax.swing.JFrame {
         pn_utama = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/img/Posyandu 2021 Logo (PNG1080p) - Vector69Com (3).png")).getImage());
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
-        pn_navbar.setBackground(new java.awt.Color(183, 183, 183));
+        pn_navbar.setBackground(new java.awt.Color(255, 255, 255));
+        pn_navbar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255)));
         pn_navbar.setPreferredSize(new java.awt.Dimension(935, 90));
+        pn_navbar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout pn_navbarLayout = new javax.swing.GroupLayout(pn_navbar);
-        pn_navbar.setLayout(pn_navbarLayout);
-        pn_navbarLayout.setHorizontalGroup(
-            pn_navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1084, Short.MAX_VALUE)
-        );
-        pn_navbarLayout.setVerticalGroup(
-            pn_navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 90, Short.MAX_VALUE)
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Posyandu 2021 Logo (PNG1080p) - Vector69Com (3).png"))); // NOI18N
+        pn_navbar.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 110, 90));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Kabupaten Bekasi, Jawa Barat 17510");
+        pn_navbar.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 60, 250, 30));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(1, 140, 181));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("POSYANDU SPS JELITA");
+        pn_navbar.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 10, 330, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Jl. Kencana Raya No.2 Blok F, Sumberjaya, Kec. Tambun Selatan");
+        pn_navbar.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 40, 430, 30));
 
         getContentPane().add(pn_navbar, java.awt.BorderLayout.PAGE_START);
 
@@ -83,25 +101,27 @@ public class main extends javax.swing.JFrame {
         pn_sidebar.setLayout(pn_sidebarLayout);
         pn_sidebarLayout.setHorizontalGroup(
             pn_sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+            .addGroup(pn_sidebarLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pn_sidebarLayout.setVerticalGroup(
             pn_sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_sidebarLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(pn_sidebarLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1022, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         getContentPane().add(pn_sidebar, java.awt.BorderLayout.LINE_START);
 
+        pn_utama.setBackground(new java.awt.Color(255, 255, 255));
         pn_utama.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout pn_contentLayout = new javax.swing.GroupLayout(pn_content);
         pn_content.setLayout(pn_contentLayout);
         pn_contentLayout.setHorizontalGroup(
             pn_contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pn_utama, javax.swing.GroupLayout.DEFAULT_SIZE, 834, Short.MAX_VALUE)
+            .addComponent(pn_utama, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1214, Short.MAX_VALUE)
         );
         pn_contentLayout.setVerticalGroup(
             pn_contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,9 +130,15 @@ public class main extends javax.swing.JFrame {
 
         getContentPane().add(pn_content, java.awt.BorderLayout.CENTER);
 
-        setSize(new java.awt.Dimension(1102, 870));
+        setSize(new java.awt.Dimension(1482, 870));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+       pn_utama.add(new bgOpen());
+       pn_utama.repaint();
+       pn_utama.revalidate();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -146,6 +172,10 @@ public class main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pn_content;
     private javax.swing.JPanel pn_menus;
@@ -155,44 +185,134 @@ public class main extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void execute() {
-        ImageIcon iconData = new ImageIcon(getClass().getResource("/img/Folder_2.png"));
-        ImageIcon iconTrans = new ImageIcon(getClass().getResource("/img/Folder_2.png"));
-        ImageIcon iconReport = new ImageIcon(getClass().getResource("/img/Folder_2.png"));
+        ImageIcon iconData = new ImageIcon(getClass().getResource("/img/data.png"));
+        ImageIcon iconTrans = new ImageIcon(getClass().getResource("/img/transaction.png"));
+        ImageIcon iconReport = new ImageIcon(getClass().getResource("/img/report.png"));
+        ImageIcon iconBalita = new ImageIcon(getClass().getResource("/img/bayi-log.png"));
+        ImageIcon iconIbu = new ImageIcon(getClass().getResource("/img/mother.png"));
+        ImageIcon iconBidan = new ImageIcon(getClass().getResource("/img/bidan-log.png"));
+        ImageIcon iconCheck = new ImageIcon(getClass().getResource("/img/periksa.png"));
+        ImageIcon iconPembayaran = new ImageIcon(getClass().getResource("/img/payment.png"));
+        ImageIcon iconLogout = new ImageIcon(getClass().getResource("/img/logout.png"));
+        ImageIcon iconDataReport = new ImageIcon(getClass().getResource("/img/datareport.png"));
+        ImageIcon iconDataTrans = new ImageIcon(getClass().getResource("/img/transactionreport.png"));
+        
+        
         
        
-        MenuItem Dbalita =  new MenuItem(null, true, iconData, " BALITA ", new ActionListener() {
+        MenuItem Dbalita =  new MenuItem(null, true, iconBalita, " BALITA ", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 pn_utama.removeAll();
-                pn_utama.add(new Formbalita());
+                pn_utama.add(new balita());
+                pn_utama.repaint();     
+                pn_utama.revalidate();
+            }   
+        });
+        MenuItem Dibu =  new MenuItem(null, true, iconIbu, " IBU ", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                pn_utama.removeAll();
+                pn_utama.add(new ibu());
                 pn_utama.repaint();
                 pn_utama.revalidate();
             }
         });
-        MenuItem Dibu =  new MenuItem(null, true, iconData, " IBU ", null);
-        MenuItem Dbidan =  new MenuItem(null, true, iconData, " BIDAN ", null);
-        MenuItem Dkader =  new MenuItem(null, true, iconData, " KADER ", null);
-        MenuItem Dpemeriksa =  new MenuItem(null, true, iconData, " PEMERIKSAAN ", null);
+        MenuItem Dbidan =  new MenuItem(null, true, iconBidan, " BIDAN ", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                pn_utama.removeAll();
+                pn_utama.add(new bidan());
+                pn_utama.repaint();
+                pn_utama.revalidate();
+            }
+        });
+        MenuItem Tpemeriksaan =  new MenuItem(null, true, iconCheck, " PEMERIKSAAN ", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                pn_utama.removeAll();
+                pn_utama.add(new pemeriksaan());
+                pn_utama.repaint();
+                pn_utama.revalidate();
+            }
+        });
         
-        MenuItem Rkeuangan =  new MenuItem(null, true, iconData, " KEUANGAN ", null);
+        MenuItem Dkader =  new MenuItem(null, true, iconBidan, " KADER ", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                pn_utama.removeAll();
+                pn_utama.add(new kader());
+                pn_utama.repaint();
+                pn_utama.revalidate();
+            }
+        });
         
+         MenuItem Tpembayaran =  new MenuItem(null, true, iconPembayaran, " PEMBAYARAN ", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                pn_utama.removeAll();
+                pn_utama.add(new pembayaran());
+                pn_utama.repaint();
+                pn_utama.revalidate();
+            }
+        });
+         
+         MenuItem Rdata =  new MenuItem(null, true, iconDataReport, " Report Data ", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                pn_utama.removeAll();
+                pn_utama.add(new ReportD());
+                pn_utama.repaint();
+                pn_utama.revalidate();
+            }
+        });
+         
+          MenuItem Rtransaksi =  new MenuItem(null, true, iconDataTrans, " Report Transaksi ", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                pn_utama.removeAll();
+                pn_utama.add(new ReportT());
+                pn_utama.repaint();
+                pn_utama.revalidate();
+            }
+        });
         
-        MenuItem Tpembayaran =  new MenuItem(null, true, iconData, " P. BAYAR ", null);
-        
+       
         
         
         
         
                
-        MenuItem menuData =  new MenuItem(iconData, false, null, " DATA ", null, Dbalita, Dibu, Dbidan, Dkader, Dpemeriksa);
-        MenuItem menuReport =  new MenuItem(iconData, false, null, " REPORT  ",null, Rkeuangan );
-        MenuItem menuTransaksi =  new MenuItem(iconData, false, null, " TRANSAKSI  ", null, Tpembayaran );
+        MenuItem menuData =  new MenuItem(iconData, false, null, " DATA ", null, Dbalita, Dibu, Dbidan, Dkader);
+        MenuItem menuReport =  new MenuItem(iconReport, false, null, " REPORT  ",null, Rdata,Rtransaksi );
+        MenuItem menuTransaksi =  new MenuItem(iconTrans, false, null, " TRANSAKSI  ", null, Tpemeriksaan,Tpembayaran );
         
         
+        MenuItem logout = new MenuItem(iconLogout, false, null, " Logout ", new ActionListener()  {
+          
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                 login Login = new login();
+                        Login.setVisible(true);
+                        Login.revalidate();
+                        dispose();
+            } //To change body of generated methods, choose Tools | Templates.
+            
+
+           
+        });
+        addMenu(menuData,menuTransaksi,menuReport, logout );
         
-        addMenu(menuData,menuTransaksi,menuReport );
+        //pn_sidebar
+        
+       
             
         
+    }
+    private void addLogo (LogoItem...Logo){
+        
+        pn_navbar.revalidate();
     }
     
     private void addMenu(MenuItem... menu){

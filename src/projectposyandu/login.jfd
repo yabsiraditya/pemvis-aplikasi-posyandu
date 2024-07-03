@@ -1,0 +1,315 @@
+JFDML JFormDesigner: "8.2.3.0.386" Java: "17.0.7" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {space :0:1070:x};par l {seq {space :0:0:x, comp mainpanel2:::p::p, space :0:0:x}}"
+			"$verticalGroup": "par l {space :0:660:x};par l {seq {space :0:0:x, comp mainpanel2:::p::p, space :0:0:x}}"
+		} ) {
+			name: "this"
+			"defaultCloseOperation": 3
+			"undecorated": true
+			addEvent( new FormEvent( "java.awt.event.MouseMotionListener", "mouseDragged", "formMouseDragged", true ) )
+			addEvent( new FormEvent( "java.awt.event.MouseListener", "mousePressed", "formMousePressed", true ) )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
+				name: "mainpanel2"
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+					name: "panellogin"
+					"background": new java.awt.Color( 255, 255, 255, 255 )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label_toregist"
+						"text": "Tidak mempunyai akun?"
+						"foreground": new java.awt.Color( 0, 0, 0, 255 )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 175
+						"y": 455
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "jLabel1"
+						"font": new java.awt.Font( "Segoe UI", 1, 14 )
+						"foreground": new java.awt.Color( 255, 0, 0, 255 )
+						"text": "Register"
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "jLabel1MouseClicked", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 330
+						"y": 450
+					} )
+					add( new FormComponent( "javax.swing.JPasswordField" ) {
+						name: "kpassword"
+						"font": new java.awt.Font( "Trebuchet MS", 1, 18 )
+						"border": new javax.swing.border.EtchedBorder( 1, null, sfield java.awt.Color blue )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "kpasswordActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 150
+						"y": 360
+						"width": 350
+						"height": 40
+					} )
+					add( new FormComponent( "javax.swing.JPasswordField" ) {
+						name: "kpassword1"
+						"font": new java.awt.Font( "Trebuchet MS", 1, 18 )
+						"border": new javax.swing.border.EtchedBorder( 1, null, sfield java.awt.Color blue )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "kpassword1ActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 150
+						"y": 360
+						"width": 350
+						"height": 40
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "kusername"
+						"font": new java.awt.Font( "Trebuchet MS", 1, 18 )
+						"border": new javax.swing.border.EtchedBorder( 1, null, sfield java.awt.Color blue )
+						"cursor": &Cursor0 new java.awt.Cursor( 2 )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "kusernameActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 150
+						"y": 310
+						"width": 350
+						"height": 40
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "ic_posyandu"
+						"background": new java.awt.Color( 102, 153, 255, 255 )
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/img/Posyandu 2021 Logo (PNG1080p) - Vector69Com (3).png" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 260
+						"y": 210
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "ic_close"
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/icon/Close_3.png" )
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "ic_closeMouseClicked", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 1030
+						"y": 10
+						"width": 30
+						"height": 30
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "Blogin"
+						"text": "LOGIN"
+						"border": new javax.swing.border.EtchedBorder( 1, sfield java.awt.Color white, new java.awt.Color( 0, 153, 255, 255 ) )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "BloginActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 260
+						"y": 410
+						"width": 110
+						"height": 30
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "ic_profile"
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/icon/Contacts_3.png" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 90
+						"y": 300
+						"width": 50
+						"height": 60
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "ic_key"
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/icon/Key_7.png" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 90
+						"y": 360
+						"width": 60
+						"height": 40
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "bg_login"
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/img/baks3 (1).png" )
+						"verticalTextPosition": 1
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 30
+						"y": 150
+						"width": 580
+						"height": 390
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "bg_ibu"
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/img/—Pngtree—mother with her girl illustration_14269801 (1) (3).png" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 480
+						"width": 590
+						"height": 660
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "wp"
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/img/ombre-7419016_1280.jpg" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 1070
+						"height": 660
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "card2"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+					name: "panelregist"
+					"background": new java.awt.Color( 255, 255, 255, 255 )
+					"minimumSize": new java.awt.Dimension( 1070, 660 )
+					"preferredSize": new java.awt.Dimension( 1070, 660 )
+					add( new FormComponent( "javax.swing.JPasswordField" ) {
+						name: "k_pass"
+						"font": new java.awt.Font( "Trebuchet MS", 1, 18 )
+						"border": new javax.swing.border.EtchedBorder( 1, null, sfield java.awt.Color blue )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "k_passActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 150
+						"y": 410
+						"width": 350
+						"height": 40
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label_login"
+						"font": new java.awt.Font( "Segoe UI", 1, 14 )
+						"foreground": new java.awt.Color( 102, 255, 255, 255 )
+						"text": "Login"
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "label_loginMouseClicked", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 360
+						"y": 498
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label_close"
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/icon/Close_3.png" )
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "label_closeMouseClicked", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 1030
+						"y": 10
+						"width": 30
+						"height": 30
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "posyandu"
+						"background": new java.awt.Color( 102, 153, 255, 255 )
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/img/Posyandu 2021 Logo (PNG1080p) - Vector69Com (3).png" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 260
+						"y": 210
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "k_idkader"
+						"font": new java.awt.Font( "Trebuchet MS", 1, 18 )
+						"border": new javax.swing.border.EtchedBorder( 1, null, sfield java.awt.Color blue )
+						"cursor": #Cursor0
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "k_idkaderActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 150
+						"y": 310
+						"width": 350
+						"height": 40
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "btn_regist"
+						"text": "REGISTER"
+						"border": new javax.swing.border.EtchedBorder( 1, sfield java.awt.Color white, new java.awt.Color( 0, 153, 255, 255 ) )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_registActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 260
+						"y": 460
+						"width": 110
+						"height": 30
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label_kunci"
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/icon/Key_7.png" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 90
+						"y": 410
+						"width": 60
+						"height": 40
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label_sudah"
+						"text": "Sudah mempunyai akun?"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 220
+						"y": 500
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "k_user"
+						"font": new java.awt.Font( "Trebuchet MS", 1, 18 )
+						"border": new javax.swing.border.EtchedBorder( 1, null, sfield java.awt.Color blue )
+						"cursor": #Cursor0
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "k_userActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 150
+						"y": 360
+						"width": 350
+						"height": 40
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "btn_cek"
+						"text": "Cek ID"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_cekActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 510
+						"y": 320
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label_profil"
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/icon/Contacts_3.png" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 90
+						"y": 350
+						"width": 50
+						"height": 60
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label_idc"
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/icon/id_card.png" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 90
+						"y": 300
+						"width": 40
+						"height": 60
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "bg_regis2"
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/img/baks35.png" )
+						"verticalTextPosition": 1
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 60
+						"y": 190
+						"width": 580
+						"height": 340
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "ibu"
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/img/—Pngtree—mother with her girl illustration_14269801 (1) (3).png" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 480
+						"width": 590
+						"height": 660
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "bg_regis1"
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/img/ombre-7419016_1280.jpg" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 1110
+						"height": 660
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "card3"
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+		} )
+		add( new FormContainer( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {space :0:400:x}"
+			"$verticalGroup": "par l {space :0:300:x}"
+		} ) {
+			name: "jFrame1"
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 707 )
+		} )
+		add( new FormComponent( "javax.swing.JLabel" ) {
+			name: "jLabel9"
+			"text": "jLabel9"
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 1054 )
+		} )
+	}
+}

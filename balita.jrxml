@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="90d4bcdc-2fdb-45f6-b697-8ddeed27b167">
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     balita.`kd_balita` AS balita_kd_balita,
+     balita.`nik` AS balita_nik,
+     balita.`nama` AS balita_nama,
+     balita.`jenis_kelamin` AS balita_jenis_kelamin,
+     balita.`tgl_lahir` AS balita_tgl_lahir,
+     balita.`tinggi_badan` AS balita_tinggi_badan,
+     balita.`berat_badan` AS balita_berat_badan,
+     balita.`umur` AS balita_umur,
+     balita.`id_ibu` AS balita_id_ibu
+FROM
+     `balita` balita]]>
+	</queryString>
+	<field name="balita_kd_balita" class="java.lang.Integer"/>
+	<field name="balita_nik" class="java.math.BigDecimal"/>
+	<field name="balita_nama" class="java.lang.String"/>
+	<field name="balita_jenis_kelamin" class="java.lang.String"/>
+	<field name="balita_tgl_lahir" class="java.sql.Date"/>
+	<field name="balita_tinggi_badan" class="java.lang.Float"/>
+	<field name="balita_berat_badan" class="java.lang.Float"/>
+	<field name="balita_umur" class="java.lang.Integer"/>
+	<field name="balita_id_ibu" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
