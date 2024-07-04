@@ -783,11 +783,13 @@ public class balita extends javax.swing.JPanel {
         k_umur.setText(h);
         
         try {
-            String sql = "SELECT balita.id_ibu AS id_ibu FROM ibu JOIN balita ON ibu.nama = balita.nama where ibu.nama = " + i ;
-           Statement stat = conn.createStatement();
+            String sql = "SELECT balita.id_ibu AS id_ibu, ibu.nama FROM ibu JOIN balita ON ibu.id = balita.id_ibu where ibu.nama = '" + i  + "'";
+            Statement stat = conn.createStatement();
             ResultSet rs = stat.executeQuery(sql);
-            rs.next();
-            cb_namaibu.setSelectedItem(rs.getString(1));
+            while(rs.next()) {
+                cb_namaibu.setSelectedItem(rs.getString(1)  + " - " + rs.getString(2));
+                System.out.println();
+            }
         } catch (SQLException ev) {
             
         }
